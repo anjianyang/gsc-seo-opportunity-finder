@@ -11,7 +11,8 @@ No Google API, login, database, payment, or AI is required in the current MVP.
 ## 功能列表 / Features
 
 - Local CSV upload in the browser
-- Drag-and-drop CSV upload
+- Drag-and-drop file upload
+- CSV, TSV, TXT, XLSX, and XLS parsing
 - Google Search Console field auto-detection
 - Manual field mapping when auto-detection fails
 - Data preview for mapped CSV rows
@@ -197,6 +198,14 @@ Position supports:
 
 Clicks and impressions are cleaned by removing commas, spaces, and invalid characters.
 
+## Supported File Formats
+
+- Google Search Console CSV
+- TSV export
+- TXT comma/tab delimited file
+- Excel `.xlsx`
+- Excel `.xls`
+
 ## PDF 导出说明 / PDF Export
 
 Go to:
@@ -221,3 +230,24 @@ The browser print dialog will open. Choose `Save as PDF` or `Microsoft Print to 
 - No payment flow
 - No AI-generated recommendations
 - Data is stored only in the current browser session
+
+## Sample Dataset Formats
+
+The `public/samples/` folder includes upload test files for CSV, TSV, tab-delimited TXT, XLSX, and XLS workflows:
+
+- `gsc-high-impression-low-ctr.csv`
+- `gsc-keyword-cluster.tsv`
+- `gsc-near-page-one.txt`
+- `gsc-good-performance.xlsx`
+- `gsc-real-world-sample.xls`
+
+## Negative Test Cases
+
+The `public/samples/errors/` folder includes intentionally invalid upload files for validation testing:
+
+- `gsc-missing-required-fields.csv`: missing the `query` column; should show `Required GSC fields missing`.
+- `gsc-empty-file.csv`: blank CSV content; should show `Empty file`.
+- `gsc-invalid-numeric-values.csv`: invalid `clicks`, `impressions`, `ctr`, and `position` values; should trigger row rejection or validation warnings.
+- `gsc-invalid-numeric-values.xls`: legacy Excel file with invalid `clicks`, `impressions`, `ctr`, and `position` values; should show `Invalid numeric values detected`.
+- `gsc-unsupported-format.json`: unsupported JSON upload; should show `Unsupported file type`.
+- `gsc-no-worksheet-data.xlsx`: first worksheet has no rows; should show `No worksheet data found`.

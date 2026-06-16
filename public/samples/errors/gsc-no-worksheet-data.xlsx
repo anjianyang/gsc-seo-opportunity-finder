@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+  <Worksheet ss:Name="Empty First Worksheet">
+    <Table>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Ignored Data Worksheet">
+    <Table>
+      <Row><Cell><Data ss:Type="String">query</Data></Cell><Cell><Data ss:Type="String">page</Data></Cell><Cell><Data ss:Type="String">clicks</Data></Cell><Cell><Data ss:Type="String">impressions</Data></Cell><Cell><Data ss:Type="String">ctr</Data></Cell><Cell><Data ss:Type="String">position</Data></Cell></Row>
+      <Row><Cell><Data ss:Type="String">ignored keyword</Data></Cell><Cell><Data ss:Type="String">https://examplepetgear.com/ignored</Data></Cell><Cell><Data ss:Type="Number">10</Data></Cell><Cell><Data ss:Type="Number">1000</Data></Cell><Cell><Data ss:Type="String">1%</Data></Cell><Cell><Data ss:Type="Number">9</Data></Cell></Row>
+    </Table>
+  </Worksheet>
+</Workbook>

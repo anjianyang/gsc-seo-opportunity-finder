@@ -1,0 +1,33 @@
+query	page	clicks	impressions	ctr	position
+best dog grooming table	https://examplepetgear.com/products/foldable-grooming-table	39	5200	0.75%	11.2
+folding dog grooming table	https://examplepetgear.com/products/foldable-grooming-table	34	4300	0.79%	9.8
+dog grooming table for large dogs	https://examplepetgear.com/products/heavy-duty-grooming-table	24	3600	0.67%	13.4
+heavy duty dog grooming table	https://examplepetgear.com/products/heavy-duty-grooming-table	19	2800	0.68%	14.7
+best dog dryer for home grooming	https://examplepetgear.com/products/high-velocity-dog-dryer	42	6100	0.69%	10.6
+quiet dog grooming dryer	https://examplepetgear.com/products/high-velocity-dog-dryer	21	3100	0.68%	15.3
+high velocity dryer for dogs	https://examplepetgear.com/products/high-velocity-dog-dryer	31	4700	0.66%	12.1
+dog grooming scissors for beginners	https://examplepetgear.com/products/grooming-scissors-kit	28	3900	0.72%	9.4
+curved dog grooming scissors	https://examplepetgear.com/products/grooming-scissors-kit	16	2400	0.67%	16.8
+dog thinning shears grooming	https://examplepetgear.com/products/grooming-scissors-kit	14	2100	0.67%	18.1
+pet grooming vacuum reviews	https://examplepetgear.com/products/pet-grooming-vacuum-kit	35	5000	0.70%	11.7
+best grooming vacuum for dogs	https://examplepetgear.com/products/pet-grooming-vacuum-kit	27	4200	0.64%	12.9
+dog vacuum brush for shedding	https://examplepetgear.com/products/pet-grooming-vacuum-kit	20	3200	0.63%	17.6
+cordless dog clippers for thick hair	https://examplepetgear.com/products/cordless-pet-clippers	38	5600	0.68%	10.2
+best cordless dog clippers	https://examplepetgear.com/products/cordless-pet-clippers	29	4400	0.66%	13.1
+rechargeable pet clippers	https://examplepetgear.com/products/cordless-pet-clippers	18	2600	0.69%	19.3
+dog nail grinder with light	https://examplepetgear.com/products/quiet-dog-nail-grinder	33	4100	0.80%	8.7
+best nail grinder for small dogs	https://examplepetgear.com/products/quiet-dog-nail-grinder	26	3500	0.74%	12.4
+quiet nail grinder for dogs	https://examplepetgear.com/products/quiet-dog-nail-grinder	22	3000	0.73%	14.9
+dog grooming kit for beginners	https://examplepetgear.com/collections/home-grooming-tools	44	6500	0.68%	9.9
+home pet grooming kit	https://examplepetgear.com/collections/home-grooming-tools	30	4600	0.65%	15.7
+dog grooming tools list	https://examplepetgear.com/collections/home-grooming-tools	25	3900	0.64%	18.6
+best brush for labrador shedding	https://examplepetgear.com/products/deshedding-brush	37	4800	0.77%	10.8
+deshedding brush for short hair dogs	https://examplepetgear.com/products/deshedding-brush	19	2700	0.70%	16.2
+dog bath sprayer for shower	https://examplepetgear.com/products/dog-bath-sprayer	23	3300	0.70%	13.8
+best dog bath attachment	https://examplepetgear.com/products/dog-bath-sprayer	20	2900	0.69%	17.4
+waterproof grooming apron	https://examplepetgear.com/products/waterproof-grooming-apron	17	2400	0.71%	12.8
+dog grooming apron	https://examplepetgear.com/products/waterproof-grooming-apron	13	1900	0.68%	18.9
+dog ear cleaning kit	https://examplepetgear.com/products/dog-ear-cleaning-kit	27	3800	0.71%	9.6
+best ear cleaner for dogs	https://examplepetgear.com/products/dog-ear-cleaning-kit	21	3100	0.68%	14.3
+dog clipper replacement blades	https://examplepetgear.com/products/replacement-clipper-blades	25	3600	0.69%	11.9
+ceramic dog clipper blades	https://examplepetgear.com/products/replacement-clipper-blades	15	2200	0.68%	19.1

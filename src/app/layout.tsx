@@ -3,11 +3,12 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "GSC SEO Opportunity Finder",
-  description: "Upload a Google Search Console CSV and preview its fields locally in your browser."
+  description:
+    "Upload Google Search Console exports and find practical SEO opportunities locally in your browser.",
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {

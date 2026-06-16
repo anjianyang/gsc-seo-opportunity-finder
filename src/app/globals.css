@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  background: #f7f3e8;
+  color: #18201b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(127, 163, 104, 0.24), transparent 32rem),
+    linear-gradient(135deg, #f7f3e8 0%, #eef4e4 48%, #f9efe3 100%);
+  color: #18201b;
+  font-family: "Aptos", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+@media print {
+  :root {
+    background: #ffffff;
+    color: #18201b;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  main {
+    min-height: auto;
+    padding: 0 !important;
+  }
+
+  section,
+  article,
+  header,
+  table {
+    break-inside: avoid;
+  }
+
+  section,
+  article {
+    background: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+}

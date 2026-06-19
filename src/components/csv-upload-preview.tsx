@@ -135,10 +135,15 @@ export function CsvUploadPreview() {
       rawRows: rows,
       mappedRows,
       cleanedRows: mappedRows,
+      rowsLoaded: rows.length,
+      columnsDetected: fields.length,
+      rowsValid: mappedRows.length,
+      rowsRejected: 0,
       validationSummary: {
         rowsLoaded: rows.length,
         rowsValid: mappedRows.length,
         rowsRejected: 0,
+        columnsDetected: fields.length,
       },
     };
 

@@ -14,9 +14,7 @@ export default function Home() {
             </h1>
           </div>
           <p className="max-w-xl text-lg leading-8 text-[#18221b]">
-            Upload a Google Search Console Performance export and inspect detected
-            columns plus the first rows. This local-first workflow keeps your SEO
-            data in the browser.
+            Upload a Google Search Console Performance export and inspect detected columns plus the first rows. This local-first workflow keeps your SEO data in the browser.
           </p>
         </header>
 

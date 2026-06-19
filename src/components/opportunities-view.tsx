@@ -37,7 +37,7 @@ export function OpportunitiesView() {
     return (
       <main className="min-h-screen px-5 py-8 sm:px-8 lg:px-12">
         <section className="mx-auto max-w-4xl border border-ink/15 bg-white/70 p-8 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">
+          <p className="normal-case text-sm font-semibold tracking-[0.04em] text-moss">
             SEO Opportunity Report
           </p>
           <h1 className="mt-4 text-4xl font-black text-ink">No data loaded.</h1>
@@ -57,10 +57,10 @@ export function OpportunitiesView() {
   }
 
   return (
-    <main className="min-h-screen px-5 py-8 sm:px-8 lg:px-12">
+    <main className="print-report min-h-screen px-5 py-8 sm:px-8 lg:px-12">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8">
         <header className="border-b border-ink/15 pb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">
+            <p className="normal-case text-sm font-semibold tracking-[0.04em] text-moss">
             SEO Consultant Report
           </p>
           <div className="mt-4 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
@@ -75,12 +75,13 @@ export function OpportunitiesView() {
               </p>
             </div>
             <div className="flex flex-col gap-3 print:hidden sm:flex-row lg:flex-col">
-              <button
-                className="border border-ink bg-ink px-5 py-3 text-sm font-black text-cream transition hover:bg-moss"
+      <button
+          className="no-print border border-ink bg-ink px-5 py-3 text-sm font-black text-cream transition hover:bg-moss"
+          data-html2canvas-ignore="true"
                 onClick={() => window.print()}
                 type="button"
               >
-                Download PDF Report
+        Download PDF Report
               </button>
               <Link className="text-sm font-bold text-moss hover:text-ink" href="/preview">
                 &lt;- Back to data preview
@@ -89,43 +90,45 @@ export function OpportunitiesView() {
           </div>
         </header>
 
-        <ExecutiveSummary payload={payload} summary={reportSummary} />
+        <div className="flex flex-col gap-8">
+          <ExecutiveSummary payload={payload} summary={reportSummary} />
 
-        <ReportSection
-          eyebrow="Top Opportunities"
-          title="Start with these first."
-          description="These are the highest-priority actions based on the current rule engine and CSV data."
-        >
-          {opportunities.length === 0 ? (
-            <EmptyReportState />
-          ) : (
-            <div className="grid gap-4 lg:grid-cols-2">
-              {opportunities.slice(0, 4).map((opportunity) => (
-                <OpportunityCard key={opportunity.id} opportunity={opportunity} />
-              ))}
-            </div>
-          )}
-        </ReportSection>
+          <ReportSection
+            eyebrow="Top Opportunities"
+            title="Start with these first."
+            description="These are the highest-priority actions based on the current rule engine and CSV data."
+          >
+            {opportunities.length === 0 ? (
+              <EmptyReportState />
+            ) : (
+              <div className="grid gap-4 lg:grid-cols-2">
+                {opportunities.slice(0, 4).map((opportunity) => (
+                  <OpportunityCard key={opportunity.id} opportunity={opportunity} />
+                ))}
+              </div>
+            )}
+          </ReportSection>
 
-        <ReportSection
-          eyebrow="All Opportunities"
-          title="Full prioritized list."
-          description="Sorted by priority first, then by opportunity score."
-        >
-          {opportunities.length === 0 ? (
-            <EmptyReportState />
-          ) : (
-            <OpportunityTable opportunities={opportunities} />
-          )}
-        </ReportSection>
+          <ReportSection
+            eyebrow="All Opportunities"
+            title="Full prioritized list."
+            description="Sorted by priority first, then by opportunity score."
+          >
+            {opportunities.length === 0 ? (
+              <EmptyReportState />
+            ) : (
+              <OpportunityTable opportunities={opportunities} />
+            )}
+          </ReportSection>
 
-        <ReportSection
-          eyebrow="14-Day SEO Action Plan"
-          title="What to do over the next two weeks."
-          description="This sequence turns the detected opportunities into a practical implementation plan."
-        >
-          <ActionPlan />
-        </ReportSection>
+          <ReportSection
+            eyebrow="14-Day SEO Action Plan"
+            title="What to do over the next two weeks."
+            description="This sequence turns the detected opportunities into a practical implementation plan."
+          >
+            <ActionPlan />
+          </ReportSection>
+        </div>
       </div>
     </main>
   );
@@ -139,10 +142,10 @@ function ExecutiveSummary({
   summary: ReportSummary;
 }) {
   return (
-    <section className="border border-ink/15 bg-white/75 p-5 shadow-sm">
+    <section className="print-section print-summary w-full flex-none border border-ink/15 bg-white/75 p-5 shadow-sm">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">
+          <p className="normal-case text-sm font-semibold tracking-[0.04em] text-moss">
             Executive Summary
           </p>
           <h2 className="mt-2 text-2xl font-black text-ink">The shortest path to action.</h2>
@@ -183,9 +186,9 @@ function ReportSection({
   title: string;
 }) {
   return (
-    <section className="border border-ink/15 bg-white/75 p-5 shadow-sm">
+    <section className="print-section w-full flex-none border border-ink/15 bg-white/75 p-5 shadow-sm">
       <div className="mb-5">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">{eyebrow}</p>
+        <p className="normal-case text-sm font-semibold tracking-[0.04em] text-moss">{eyebrow}</p>
         <h2 className="mt-2 text-2xl font-black text-ink">{title}</h2>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-ink/64">{description}</p>
       </div>
@@ -196,10 +199,10 @@ function ReportSection({
 
 function OpportunityCard({ opportunity }: { opportunity: SeoOpportunity }) {
   return (
-    <article className="border border-ink/12 bg-cream/75 p-5">
+    <article className="print-card border border-ink/12 bg-cream/75 p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-sm font-bold uppercase tracking-[0.14em] text-moss">
+          <p className="normal-case text-sm font-bold tracking-[0.04em] text-moss">
             {opportunity.type}
           </p>
           <h3 className="mt-2 text-xl font-black leading-tight text-ink">
@@ -234,33 +237,33 @@ function OpportunityCard({ opportunity }: { opportunity: SeoOpportunity }) {
 
 function OpportunityTable({ opportunities }: { opportunities: SeoOpportunity[] }) {
   return (
-    <div className="overflow-x-auto border border-ink/10 bg-white">
+    <div className="print-table min-h-0 overflow-visible border border-ink/10 bg-white">
       <table className="min-w-full border-collapse text-left text-sm">
         <thead className="bg-ink text-cream">
           <tr>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Opportunity Score</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Impression Score</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Position Score</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">CTR Score</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Bonus Score</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Opportunity Type</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Priority</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Keyword</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Page</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Action Priority</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Traffic Gain</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Expected Impact</th>
-            <th className="whitespace-nowrap px-3 py-3 font-bold">Effort</th>
+            <th className="whitespace-nowrap px-3 py-3 font-bold normal-case">Opportunity Score</th>
+            <th className="print-hide whitespace-nowrap px-3 py-3 font-bold normal-case">Impression Score</th>
+            <th className="print-hide whitespace-nowrap px-3 py-3 font-bold normal-case">Position Score</th>
+            <th className="print-hide whitespace-nowrap px-3 py-3 font-bold normal-case">CTR Score</th>
+            <th className="print-hide whitespace-nowrap px-3 py-3 font-bold normal-case">Bonus Score</th>
+            <th className="whitespace-nowrap px-3 py-3 font-bold normal-case">Opportunity Type</th>
+            <th className="whitespace-nowrap px-3 py-3 font-bold normal-case">Priority</th>
+            <th className="whitespace-nowrap px-3 py-3 font-bold normal-case">Keyword</th>
+            <th className="whitespace-nowrap px-3 py-3 font-bold normal-case">Page</th>
+            <th className="print-hide whitespace-nowrap px-3 py-3 font-bold normal-case">Action Priority</th>
+            <th className="print-hide whitespace-nowrap px-3 py-3 font-bold normal-case">Traffic Gain</th>
+            <th className="print-hide whitespace-nowrap px-3 py-3 font-bold normal-case">Expected Impact</th>
+            <th className="print-hide whitespace-nowrap px-3 py-3 font-bold normal-case">Effort</th>
           </tr>
         </thead>
         <tbody>
           {opportunities.map((opportunity) => (
             <tr className="border-t border-ink/10" key={opportunity.id}>
               <td className="px-3 py-3 font-black text-ink">{opportunity.score}</td>
-              <td className="px-3 py-3 text-ink/78">{opportunity.impressionScore}</td>
-              <td className="px-3 py-3 text-ink/78">{opportunity.positionScore}</td>
-              <td className="px-3 py-3 text-ink/78">{opportunity.ctrScore}</td>
-              <td className="px-3 py-3 text-ink/78">{opportunity.bonusScore}</td>
+              <td className="print-hide px-3 py-3 text-ink/78">{opportunity.impressionScore}</td>
+              <td className="print-hide px-3 py-3 text-ink/78">{opportunity.positionScore}</td>
+              <td className="print-hide px-3 py-3 text-ink/78">{opportunity.ctrScore}</td>
+              <td className="print-hide px-3 py-3 text-ink/78">{opportunity.bonusScore}</td>
               <td className="px-3 py-3 text-ink/78">{opportunity.type}</td>
               <td className="px-3 py-3">
                 <Badge tone={opportunity.priority === "High" ? "high" : "medium"}>
@@ -273,14 +276,14 @@ function OpportunityTable({ opportunities }: { opportunities: SeoOpportunity[] }
               <td className="max-w-md truncate px-3 py-3 text-ink/78">
                 {opportunity.page || "-"}
               </td>
-              <td className="px-3 py-3">
+              <td className="print-hide px-3 py-3">
                 <Badge tone={opportunity.actionPriority === "High" ? "high" : "medium"}>
                   {opportunity.actionPriority}
                 </Badge>
               </td>
-              <td className="px-3 py-3 text-ink/78">{opportunity.estimatedTrafficGain}</td>
-              <td className="max-w-md px-3 py-3 text-ink/68">{opportunity.expectedImpact}</td>
-              <td className="whitespace-nowrap px-3 py-3 text-ink/68">
+              <td className="print-hide px-3 py-3 text-ink/78">{opportunity.estimatedTrafficGain}</td>
+              <td className="print-hide max-w-md px-3 py-3 text-ink/68">{opportunity.expectedImpact}</td>
+              <td className="print-hide whitespace-nowrap px-3 py-3 text-ink/68">
                 {opportunity.estimatedEffort}
               </td>
             </tr>
@@ -316,10 +319,10 @@ function ActionPlan() {
   ];
 
   return (
-    <div className="grid gap-4 md:grid-cols-2">
+    <div className="print-action-plan grid gap-4 md:grid-cols-2">
       {steps.map((step) => (
-        <article className="border border-ink/12 bg-cream/75 p-5" key={step.days}>
-          <p className="text-sm font-black uppercase tracking-[0.14em] text-moss">{step.days}</p>
+        <article className="print-card border border-ink/12 bg-cream/75 p-5" key={step.days}>
+          <p className="normal-case text-sm font-black tracking-[0.04em] text-moss">{step.days}</p>
           <h3 className="mt-2 text-xl font-black text-ink">{step.title}</h3>
           <p className="mt-3 text-sm leading-6 text-ink/68">{step.body}</p>
         </article>
@@ -340,7 +343,7 @@ function ScoreBreakdown({ opportunity }: { opportunity: SeoOpportunity }) {
     <div className="grid gap-2 sm:grid-cols-4">
       {items.map((item) => (
         <div className="border border-ink/10 bg-white/70 p-3" key={item.label}>
-          <p className="text-xs font-black uppercase tracking-[0.12em] text-moss">
+          <p className="normal-case text-xs font-black tracking-[0.04em] text-moss">
             {item.label}
           </p>
           <p className="mt-1 text-lg font-black text-ink">
@@ -355,7 +358,7 @@ function ScoreBreakdown({ opportunity }: { opportunity: SeoOpportunity }) {
 function DetailBlock({ text, title }: { text: string; title: string }) {
   return (
     <div>
-      <p className="text-xs font-black uppercase tracking-[0.14em] text-moss">{title}</p>
+      <p className="normal-case text-xs font-black tracking-[0.04em] text-moss">{title}</p>
       <p className="mt-1 text-sm leading-6 text-ink/70">{text}</p>
     </div>
   );
@@ -364,7 +367,7 @@ function DetailBlock({ text, title }: { text: string; title: string }) {
 function ActionList({ actions }: { actions: string[] }) {
   return (
     <div>
-      <p className="text-xs font-black uppercase tracking-[0.14em] text-moss">
+      <p className="normal-case text-xs font-black tracking-[0.04em] text-moss">
         Recommended Action
       </p>
       <ul className="mt-2 grid gap-2 text-sm font-semibold text-ink/72">
@@ -404,7 +407,7 @@ function EmptyReportState() {
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-h-28 border border-ink/10 bg-cream/75 p-4">
-      <p className="text-xs font-bold uppercase tracking-[0.14em] text-moss">{label}</p>
+      <p className="normal-case text-xs font-bold tracking-[0.04em] text-moss">{label}</p>
       <p className="mt-2 text-lg font-black leading-snug text-ink">{value}</p>
     </div>
   );

@@ -1,106 +1,114 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import {
-  PREVIEW_STORAGE_KEY,
-  REQUIRED_PREVIEW_FIELDS,
-  type PreviewPayload
-} from "@/lib/preview-storage";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { PREVIEW_STORAGE_KEY } from "@/lib/preview-storage";
+
+type PreviewRow = {
+  query?: string;
+  page?: string;
+  clicks?: string;
+  impressions?: string;
+  ctr?: string;
+  position?: string;
+  [key: string]: string | undefined;
+};
+
+type PreviewPayload = {
+  fields?: string[];
+  columns?: string[];
+  rows?: PreviewRow[];
+  rawRows?: PreviewRow[];
+  mappedRows?: PreviewRow[];
+  cleanedRows?: PreviewRow[];
+  mapping?: Record<string, string>;
+  fieldMapping?: Record<string, string>;
+  rowsLoaded?: number;
+  rowsValid?: number;
+  rowsRejected?: number;
+  columnsDetected?: number;
+  validationSummary?: {
+    rowsLoaded?: number;
+    rowsValid?: number;
+    rowsRejected?: number;
+    columnsDetected?: number;
+  };
+};
+
+const PREVIEW_COLUMNS = ["query", "page", "clicks", "impressions", "ctr", "position"] as const;
 
 export function DataPreview() {
+  const router = useRouter();
   const [payload, setPayload] = useState<PreviewPayload | null>(null);
-  const [hasLoaded, setHasLoaded] = useState(false);
 
   useEffect(() => {
     const storedPayload = window.sessionStorage.getItem(PREVIEW_STORAGE_KEY);
 
-    if (storedPayload) {
-      try {
-        setPayload(JSON.parse(storedPayload) as PreviewPayload);
-      } catch {
-        setPayload(null);
-      }
+    if (!storedPayload) {
+      setPayload(null);
+      return;
     }
 
-    setHasLoaded(true);
+    try {
+      setPayload(JSON.parse(storedPayload) as PreviewPayload);
+    } catch {
+      setPayload(null);
+    }
   }, []);
 
-  if (!hasLoaded) {
-    return null;
-  }
+  const mappedRows = useMemo(() => getMappedRows(payload), [payload]);
+  const summary = useMemo(() => getSummary(payload, mappedRows), [payload, mappedRows]);
+  const previewRows = mappedRows.slice(0, 10);
 
-  if (!payload || payload.rows.length === 0) {
+  if (!payload || mappedRows.length === 0) {
     return (
-      <main className="min-h-screen px-5 py-8 sm:px-8 lg:px-12">
-        <section className="mx-auto max-w-4xl border border-ink/15 bg-white/70 p-8 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">
-            Data preview
-          </p>
-          <h1 className="mt-4 text-4xl font-black text-ink">No data loaded.</h1>
-          <p className="mt-4 text-base leading-7 text-ink/70">
-            Upload a CSV and confirm the required field mapping before opening the
-            preview page.
-          </p>
-          <Link
-            className="mt-6 inline-flex border border-ink bg-ink px-5 py-3 text-sm font-black text-cream transition hover:bg-moss"
-            href="/"
-          >
-            Back to upload
-          </Link>
-        </section>
+      <main className="min-h-screen bg-[#f3f5e9] px-6 py-12 text-[#18221b] md:px-10 lg:px-16">
+        <div className="mx-auto max-w-6xl rounded-sm border border-[#18221b]/15 bg-white/65 p-8 shadow-sm">
+          <h1 className="text-4xl font-black">Data Preview</h1>
+          <p className="mt-5 text-lg text-[#3f463f]">No data loaded.</p>
+        </div>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen px-5 py-8 sm:px-8 lg:px-12">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8">
-        <header className="flex flex-col gap-5 border-b border-ink/15 pb-8 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-moss">
-              Data preview
-            </p>
-            <h1 className="mt-3 text-4xl font-black leading-tight text-ink sm:text-5xl">
-              Review the mapped Search Console data.
-            </h1>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            <SummaryCard label="Rows loaded" value={String(payload.rowsLoaded)} />
-            <SummaryCard label="Rows valid" value={String(payload.rowsValid ?? payload.rows.length)} />
-            <SummaryCard label="Rows rejected" value={String(payload.rowsRejected ?? 0)} />
-            <SummaryCard label="Columns detected" value={String(payload.columnsDetected)} />
-          </div>
+    <main className="min-h-screen bg-[#f3f5e9] px-6 py-12 text-[#18221b] md:px-10 lg:px-16">
+      <div className="mx-auto max-w-7xl">
+        <header className="border-b border-[#d7d4c8] pb-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#2f6f43]">
+            Data Preview
+          </p>
+          <h1 className="mt-5 text-5xl font-black tracking-tight">
+            Review the first 10 mapped rows.
+          </h1>
         </header>
 
-        <section className="border border-ink/15 bg-white/75 p-5 shadow-sm">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h2 className="text-xl font-black text-ink">First 10 rows</h2>
-              <p className="mt-2 text-sm text-ink/62">{payload.fileName}</p>
-            </div>
-            <p className="text-sm font-semibold text-ink/60">
-              Showing mapped columns only
-            </p>
-          </div>
+        <section className="mt-8 grid gap-4 md:grid-cols-4">
+          <SummaryCard label="Rows Loaded" value={summary.rowsLoaded} />
+          <SummaryCard label="Rows Valid" value={summary.rowsValid} />
+          <SummaryCard label="Rows Rejected" value={summary.rowsRejected} />
+          <SummaryCard label="Columns Detected" value={summary.columnsDetected} />
+        </section>
 
-          <div className="mt-5 overflow-x-auto border border-ink/10 bg-white">
-            <table className="min-w-full border-collapse text-left text-sm">
-              <thead className="bg-ink text-cream">
+        <section className="mt-8 overflow-hidden rounded-sm border border-[#18221b]/15 bg-white/65 shadow-sm">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[900px] border-collapse text-left text-sm">
+              <thead className="bg-[#162219] text-[#fffdf6]">
                 <tr>
-                  {REQUIRED_PREVIEW_FIELDS.map((field) => (
-                    <th className="whitespace-nowrap px-3 py-3 font-bold" key={field}>
-                      {field}
+                  {PREVIEW_COLUMNS.map((column) => (
+                    <th key={column} className="px-4 py-4 font-black uppercase tracking-[0.12em]">
+                      {column}
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {payload.rows.slice(0, 10).map((row, rowIndex) => (
-                  <tr className="border-t border-ink/10" key={`${payload.fileName}-${rowIndex}`}>
-                    {REQUIRED_PREVIEW_FIELDS.map((field) => (
-                      <td className="max-w-sm truncate px-3 py-3 text-ink/76" key={field}>
-                        {row[field] || "-"}
+                {previewRows.map((row, index) => (
+                  <tr key={`${row.query ?? "row"}-${index}`} className="border-t border-[#e4dfd1]">
+                    {PREVIEW_COLUMNS.map((column) => (
+                      <td key={column} className="max-w-[320px] px-4 py-4 align-top text-[#283228]">
+                        {row[column] ?? ""}
                       </td>
                     ))}
                   </tr>
@@ -108,29 +116,83 @@ export function DataPreview() {
               </tbody>
             </table>
           </div>
-
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <Link className="text-sm font-bold text-moss hover:text-ink" href="/">
-              &lt;- Back to field mapping
-            </Link>
-            <Link
-              className="border border-ink bg-ink px-5 py-3 text-sm font-black text-cream transition hover:bg-moss"
-              href="/opportunities"
-            >
-              Continue to opportunity analysis
-            </Link>
-          </div>
         </section>
+
+        <div className="mt-8 flex justify-end">
+          <button
+            type="button"
+            className="bg-[#162219] px-8 py-4 text-sm font-black text-[#fffdf6] shadow-[6px_6px_0_#c6a15b] transition hover:-translate-y-0.5 hover:shadow-[8px_8px_0_#c6a15b]"
+            onClick={() => router.push("/opportunities")}
+          >
+            Continue to opportunity analysis
+          </button>
+        </div>
       </div>
     </main>
   );
 }
 
-function SummaryCard({ label, value }: { label: string; value: string }) {
+function SummaryCard({ label, value }: { label: string; value: number }) {
   return (
-    <div className="min-w-44 border border-ink/10 bg-white/75 p-4">
-      <p className="text-xs font-bold uppercase tracking-[0.14em] text-moss">{label}</p>
-      <p className="mt-2 text-2xl font-black text-ink">{value}</p>
+    <div className="rounded-sm border border-[#18221b]/15 bg-white/65 p-5 shadow-sm">
+      <p className="text-xs font-black uppercase tracking-[0.18em] text-[#55724e]">{label}</p>
+      <p className="mt-3 text-4xl font-black text-[#18221b]">{value}</p>
     </div>
   );
+}
+
+function getSummary(payload: PreviewPayload | null, mappedRows: PreviewRow[]) {
+  const rowsLoaded =
+    payload?.rowsLoaded ??
+    payload?.validationSummary?.rowsLoaded ??
+    payload?.rows?.length ??
+    payload?.rawRows?.length ??
+    mappedRows.length;
+
+  return {
+    rowsLoaded,
+    rowsValid:
+      payload?.rowsValid ??
+      payload?.validationSummary?.rowsValid ??
+      payload?.cleanedRows?.length ??
+      payload?.mappedRows?.length ??
+      mappedRows.length,
+    rowsRejected: payload?.rowsRejected ?? payload?.validationSummary?.rowsRejected ?? 0,
+    columnsDetected:
+      payload?.columnsDetected ??
+      payload?.validationSummary?.columnsDetected ??
+      payload?.columns?.length ??
+      payload?.fields?.length ??
+      PREVIEW_COLUMNS.length,
+  };
+}
+
+function getMappedRows(payload: PreviewPayload | null): PreviewRow[] {
+  if (!payload) {
+    return [];
+  }
+
+  if (payload.cleanedRows?.length) {
+    return payload.cleanedRows;
+  }
+
+  if (payload.mappedRows?.length) {
+    return payload.mappedRows;
+  }
+
+  const sourceRows = payload.rows ?? payload.rawRows ?? [];
+  const mapping = payload.mapping ?? payload.fieldMapping;
+
+  if (!mapping) {
+    return sourceRows;
+  }
+
+  return sourceRows.map((row) => ({
+    query: row[mapping.query] ?? "",
+    page: row[mapping.page] ?? "",
+    clicks: row[mapping.clicks] ?? "",
+    impressions: row[mapping.impressions] ?? "",
+    ctr: row[mapping.ctr] ?? "",
+    position: row[mapping.position] ?? "",
+  }));
 }

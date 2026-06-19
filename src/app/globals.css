@@ -42,8 +42,6 @@ input {
     padding: 0 !important;
   }
 
-  section,
-  article,
   header,
   table {
     break-inside: avoid;
@@ -57,5 +55,269 @@ input {
 
   .print\:hidden {
     display: none !important;
+  }
+}
+@media print {
+  @page {
+    margin: 14mm;
+    size: auto;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  body * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    max-height: none !important;
+    transform: none !important;
+  }
+
+  .overflow-hidden,
+  .overflow-x-auto,
+  .overflow-y-auto,
+  .overflow-auto,
+  [class*="overflow-"] {
+    overflow: visible !important;
+  }
+
+  .min-h-screen,
+  [class*="min-h-"],
+  [class*="h-["],
+  [class*="max-h-"] {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  button,
+  nav,
+  .no-print,
+  [data-html2canvas-ignore],
+  [role="button"],
+  [aria-live],
+  [data-radix-portal],
+  [data-floating-ui-portal],
+  nextjs-portal,
+  #__next-build-watcher,
+  [data-nextjs-dialog-overlay],
+  [data-nextjs-toast],
+  [data-nextjs-error-overlay],
+  [data-nextjs-dev-overlay],
+  [data-nextjs-dialog],
+  [id*="extension"],
+  [class*="extension"],
+  [id*="widget"],
+  [class*="widget"],
+  [id*="floating"],
+  [class*="floating"],
+  [id*="Floating"],
+  [class*="Floating"],
+  [id*="chrome"],
+  [class*="chrome"],
+  .fixed,
+  .sticky,
+  .toast,
+  .tooltip,
+  .popover,
+  .modal,
+  .floating,
+  [class*="floating"],
+  [class*="Floating"],
+  iframe,
+  [style*="position: fixed"],
+  [style*="position:fixed"],
+  [style*="position: sticky"],
+  [style*="position:sticky"],
+  [style*="z-index: 2147483647"],
+  [style*="z-index:2147483647"] {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  * {
+    background-image: none !important;
+  }
+
+  .print-report,
+  .print-report * {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    max-width: 100% !important;
+    transform: none !important;
+  }
+
+  .print-report {
+    display: block !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  main,
+  section,
+  article,
+  div {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  .print-section {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 0 10mm !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .print-summary {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-action-plan {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .print-section > div:first-child {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .print-action-plan > article:first-child {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+
+  .print-card {
+    break-inside: auto;
+    page-break-inside: auto;
+    margin-bottom: 5mm !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  .print-table {
+    width: 100% !important;
+    overflow: visible !important;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .print-report table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    font-size: 9px !important;
+    line-height: 1.35 !important;
+  }
+
+  table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    font-size: 9px !important;
+    line-height: 1.35 !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  th,
+  td {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    hyphens: auto !important;
+    padding: 6px !important;
+    vertical-align: top !important;
+  }
+
+  .print-report thead {
+    display: table-header-group !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-report tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .print-report th,
+  .print-report td {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    hyphens: auto !important;
+    padding: 6px !important;
+    vertical-align: top !important;
+  }
+
+  .print-hide {
+    display: none !important;
+  }
+
+  .print-report th,
+  .print-report td {
+    width: auto !important;
+  }
+
+  .print-table th:nth-child(1),
+  .print-table td:nth-child(1) {
+    width: 12% !important;
+  }
+
+  .print-table th:nth-child(6),
+  .print-table td:nth-child(6) {
+    width: 22% !important;
+  }
+
+  .print-table th:nth-child(7),
+  .print-table td:nth-child(7) {
+    width: 16% !important;
+    white-space: nowrap !important;
+  }
+
+  .print-table th:nth-child(8),
+  .print-table td:nth-child(8) {
+    width: 24% !important;
+  }
+
+  .print-table th:nth-child(9),
+  .print-table td:nth-child(9) {
+    width: 26% !important;
+  }
+
+  .print-table td:nth-child(7) span,
+  .print-table th:nth-child(7) {
+    white-space: nowrap !important;
   }
 }

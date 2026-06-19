@@ -1,5 +1,7 @@
 # GSC SEO Opportunity Finder
 
+![GSC SEO Opportunity Finder](docs/screenshot.png)
+
 ## 项目介绍 / Project Introduction
 
 GSC SEO Opportunity Finder is a lightweight browser-based tool for turning Google Search Console CSV exports into an actionable SEO opportunity report.
